@@ -21,4 +21,8 @@ class QuizBrain {
       _questionNumber++;
     }
   }
+
+  int getQuestionNum() {
+    return _questionNumber;
+  }
 }
