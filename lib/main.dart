@@ -36,20 +36,7 @@ class _QuizPageState extends State<QuizPage> {
     bool correctAnswer = quizBrain.getQuestionAnswer();
 
     setState(() {
-      if (correctAnswer == myAnswer) {
-        scoreKeeper.add(
-            Icon(
-              Icons.check,
-              color: Colors.green,)
-        );
-      } else {
-        scoreKeeper.add(
-            Icon(
-              Icons.close,
-              color: Colors.red,)
-        );
-      }
-      if (quizBrain.nextQuestion() == false) {
+      if (quizBrain.isFinished() == true) {
         Alert(
           context: context,
           type: AlertType.success,
@@ -68,7 +55,23 @@ class _QuizPageState extends State<QuizPage> {
         ).show();
         quizBrain.reset();
         scoreKeeper = [];
-      };
+      }
+      else {
+        if (correctAnswer == myAnswer) {
+          scoreKeeper.add(
+              Icon(
+                Icons.check,
+                color: Colors.green,)
+          );
+        } else {
+          scoreKeeper.add(
+              Icon(
+                Icons.close,
+                color: Colors.red,)
+          );
+        }
+        quizBrain.nextQuestion();
+      }
     });
   }
 
