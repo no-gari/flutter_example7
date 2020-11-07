@@ -16,13 +16,15 @@ class QuizBrain {
     return _questionBank[_questionNumber].questionAnswer;
   }
 
-  void nextQuestion() {
+  bool nextQuestion() {
     if (_questionNumber < _questionBank.length-1) {
       _questionNumber++;
+    } else {
+      return false;
     }
   }
 
-  int getQuestionNum() {
-    return _questionNumber;
+  void reset() {
+    _questionNumber = 0;
   }
 }

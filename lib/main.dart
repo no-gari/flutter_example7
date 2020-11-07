@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quiz_brain.dart';
 
 void main() => runApp(Quizzler());
@@ -48,8 +49,26 @@ class _QuizPageState extends State<QuizPage> {
               color: Colors.red,)
         );
       }
-      quizBrain.nextQuestion();
-      print(quizBrain.getQuestionNum());
+      if (quizBrain.nextQuestion() == false) {
+        Alert(
+          context: context,
+          type: AlertType.success,
+          title: "questions done",
+          desc: "Want to try again?",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "start again",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              width: 250,
+            )
+          ],
+        ).show();
+        quizBrain.reset();
+        scoreKeeper = [];
+      };
     });
   }
 
